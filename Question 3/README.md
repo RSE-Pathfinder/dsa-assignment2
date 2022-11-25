@@ -1,0 +1,1 @@
+Q3. Implement KMP in C++, perform a search on the text BCBAABACAABABACAA for the occurrence of ABABAC. Your program should immediately terminate and output the position when a match is found. 
