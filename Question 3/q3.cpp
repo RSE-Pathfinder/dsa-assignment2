@@ -19,28 +19,30 @@
  * @copyright Copyright (c) 2022
  * 
  */
-#include <string>
-#include <iostream>
+#include <string> 	// std::string 
+#include <iostream> // std::cout
 
-#define NO_OF_CHARS 256
+#define NO_OF_CHARS 256 // ASCII is an 8-bit standard
 
 /**
  * @brief Determines the next State based on the current state and character
  * 
  * @param pat 	Pattern
  * @param state Current State
- * @param c 	Current character
+ * @param c 	Input Character
  * @return int 
  */
 int DFANext(std::string pat, int state, int c)
 {
-	int M = pat.length();
+	int M = pat.length(); // Length of Pattern
 
+	// If Input Character matches next character in Pattern
 	if (state < M && c == pat[state]) 
-		return state + 1;
+		return state + 1; // Return Next State
 
 	int next_state, i;
 
+	// If Input Character matches any previous character in Pattern
 	for (next_state = state; next_state > 0; next_state--)
 	{
 		if (pat[next_state - 1] == c)
@@ -49,11 +51,12 @@ int DFANext(std::string pat, int state, int c)
 				if (pat[i] != pat[state - next_state + 1 + i]) 
 					break;
 			if (i == next_state - 1) 
-				return next_state;
+				return next_state; // Return Next State
 		}
 	}
 
-	return 0;
+	// If Input Character does not match any characters in Pattern
+	return -1; // Default to -1
 }
 
 /**
@@ -69,7 +72,8 @@ void DFABuild(std::string pat, int dfa[][NO_OF_CHARS])
 	// Build DFA 
 	for (int state{0} ; state <= M ; ++state)
 	{
-		for (int c{0} ; c < NO_OF_CHARS ; ++c)
+		// All 256 ACSII Characters
+		for (int c{0} ; c < NO_OF_CHARS ; ++c)  
 		{
 			// Get Next State based on current state and character
 			dfa[state][c] = DFANext(pat, state, c);
@@ -103,8 +107,11 @@ void KMPSearch(std::string txt, std::string pat)
 
 		// Display if Pattern was found
 		if (state == M)
+		{
 			std::cout << "Pattern found at index " << i - M + 1 << std::endl;
-		else
+			return; // Terminate Program
+		}
+		else if (i + 1 == N)
 			std::cout << "Pattern not found" << std::endl;
 	}
 }
@@ -116,7 +123,9 @@ void KMPSearch(std::string txt, std::string pat)
  */
 int main()
 {
+	// Text String to Search
 	std::string txt = "BCBAABACAABABACAA";
+	// Pattern String to be Searched for
 	std::string pat = "ABABAC";
 
 	KMPSearch(txt, pat);
