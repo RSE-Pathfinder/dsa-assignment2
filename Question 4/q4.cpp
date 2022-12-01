@@ -1,3 +1,13 @@
+/**
+ * @file q4.cpp
+ * @author Muhammad Syamim (2101950@sit.singaporetech.edu.sg)
+ * @brief Program to generate an adjacency list and perform depth first search and breadth first search
+ * @version 0.1
+ * @date 2022-12-01
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <fstream>  //ifstream
 #include <iostream> //cout
 #include <vector>   //vector
